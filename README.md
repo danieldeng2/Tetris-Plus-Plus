@@ -1,6 +1,6 @@
 # Tetris Plus Plus
 
-An extension on the classic tetris game. 
+An extension on the classic tetris game, adapted to the quarentine life style. 
 
 **Tetris Sports:**
 Need exercise but can't go outside? No problem. Tetris Sport is a way  to exercise indoors in a fun way. We used a Raspberry Pi and some accelerometres to allow you to control a Tetris game by moving around.
