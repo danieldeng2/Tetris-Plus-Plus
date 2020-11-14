@@ -61,7 +61,7 @@ lib:
 clean:
 	rm -f $(DEPS)
 	rm -f $(CORE_OBJS) $(GENE_OBJS) $(RL_OBJS) $(PI_OBJS)
-	rm -f  bin/tetris bin/genetic-ai-play bin/rltrain bin/tetrispi
+	rm -f  bin/tetris bin/genetic-ai-play bin/genetic-train bin/rltrain bin/tetrispi
 	cd lib; make clean
 
 .PHONY: src clean lib core genetic pi rl
