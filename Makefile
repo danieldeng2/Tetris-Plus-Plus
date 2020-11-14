@@ -7,7 +7,7 @@ CORE_OBJS = $(patsubst src/core/%.c,obj/core/%.o,$(CORE_SRC))
 GENE_OBJS = $(patsubst src/genetic-ai/%.c,obj/genetic-ai/%.o,$(GENE_SRC))
 RL_OBJS   = $(patsubst src/rl-ai/%.c,obj/rl-ai/%.o,$(RL_SRC))
 PI_OBJS   = $(patsubst src/pi/%.c,obj/pi/%.o,$(PI_SRC))
-CORE_NO_MAIN = $(filter-out obj/core/tetris.o, $(CORE_OBJS))
+CORE_NO_MAIN = $(filter-out obj/core/game.o, $(filter-out obj/core/tetris.o, $(CORE_OBJS)))
 DEPS = $(CORE_OBJS:%.o=%.d) $(GENE_OBJS:%.o=%.d) $(RL_OBJS:%.o=%.d) $(PI_OBJS:%.o=%.d)
  
 CC          = gcc
@@ -30,14 +30,14 @@ bin/tetris: $(CORE_OBJS)
 bin/tetrispi: $(PI_OBJS) $(CORE_OBJS)
 	$(CC) $^ $(LDLIBS) $(PILIBS) -o $@
 
-bin/genetic-ai-play: $(filter-out obj/genetic-ai/genetic-train.o, $(GENE_OBJS)) $(filter-out obj/core/game.o, $(CORE_NO_MAIN))
+bin/genetic-ai-play: $(filter-out obj/genetic-ai/genetic-train.o, $(GENE_OBJS)) $(CORE_NO_MAIN)
 	$(CC) $^ $(LDLIBS) -fopenmp -o $@
 
-bin/genetic-train: $(filter-out obj/genetic-ai/genetic-ai-play.o, $(GENE_OBJS)) $(filter-out obj/core/game.o, $(CORE_NO_MAIN))
+bin/genetic-train: $(filter-out obj/genetic-ai/genetic-ai-play.o, $(GENE_OBJS)) $(CORE_NO_MAIN)
 	$(CC) $^ $(LDLIBS) -fopenmp -o $@
 
-bin/rltrain: lib bin/tetris $(RL_OBJS) $(filter-out obj/core/game.o, $(CORE_NO_MAIN))
-	$(CC)  $(RL_OBJS) $(filter-out obj/core/game.o, $(CORE_NO_MAIN)) $(LDLIBS) -o $@
+bin/rltrain: lib bin/tetris $(RL_OBJS) $(CORE_NO_MAIN)
+	$(CC)  $(RL_OBJS) $(CORE_NO_MAIN) $(LDLIBS) -o $@
 
 # pre-processor automatically adds headers as dependencies
 -include $(DEPS)
