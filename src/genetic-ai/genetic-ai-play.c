@@ -23,9 +23,9 @@ static param_state_t *param_risky_p = &param_risky;
 
 int main(int argc, char **argv) {
   int levelNum = startScreen();
-  if (strcmp(argv[1], "conservative") == 0) {
+  if (argc > 1 && strcmp(argv[1], "conservative") == 0) {
     startGameWithAI(levelNum, param_conservative_p, true);
-  } else if (strcmp(argv[1], "risky") == 0) {
+  } else {
     startGameWithAI(levelNum, param_risky_p, false);
   }
 
