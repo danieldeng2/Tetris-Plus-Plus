@@ -37,8 +37,8 @@ bool spawnTetriminos(state_t *curr) {
   curr->pos.x = 5;
   curr->pos.y = 2;
   curr->rotation = 0;
-  if (!canMove(curr)) return false;
-  return true;
+	
+	return canMove(curr);
 }
 
 bool dropPiece(state_t *curr) {
